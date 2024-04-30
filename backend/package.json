@@ -1,11 +1,28 @@
 {
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.3.2"
+  "version": 2,
+  "builds": [
+    {
+      "src": "seeds.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ],
+  "functions": {
+    "seedData": {
+      "handler": "seeds.js",
+      "memory": 128
+    }
   },
-  "scripts": {
-		"start": "node server.js",
-    "seeds": "mongosh < ./seeds.js"
-	}
+  "hooks": {
+    "postdeploy": "vercel invoke seedData"
+  }
 }
