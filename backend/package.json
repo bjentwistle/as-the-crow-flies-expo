@@ -1,28 +1,19 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "seeds.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
-    }
-  ],
-  "functions": {
-    "seedData": {
-      "handler": "seeds.js",
-      "memory": 128
-    }
-  },
-  "hooks": {
-    "postdeploy": "vercel invoke seedData"
+    "version": 2,
+    "builds": [
+      {
+        "src": "seeds.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "server.js"
+      }
+    ]
   }
-}
